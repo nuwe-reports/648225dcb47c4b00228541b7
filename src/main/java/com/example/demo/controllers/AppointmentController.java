@@ -61,7 +61,7 @@ public class AppointmentController {
         appointment.setFinishesAt(appointmentDTO.getFinishesAt());
 
         Appointment savedAppointment = appointmentRepository.save(appointment);
-        return new ResponseEntity<>(savedAppointment, HttpStatus.CREATED);
+        return new ResponseEntity<>(savedAppointment, HttpStatus.OK);
     }
 
 
