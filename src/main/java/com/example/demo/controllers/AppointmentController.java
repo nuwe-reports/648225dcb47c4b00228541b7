@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.dto.AppointmentDTO;
 import com.example.demo.repositories.*;
 import com.example.demo.entities.*;
 
@@ -51,12 +52,16 @@ public class AppointmentController {
     }
 
     @PostMapping("/appointment")
-    public ResponseEntity<List<Appointment>> createAppointment(@RequestBody Appointment appointment){
-        /** TODO 
-         * Implement this function, which acts as the POST /api/appointment endpoint.
-         * Make sure to check out the whole project. Specially the Appointment.java class
-         */
-        return new ResponseEntity<>(HttpStatus.I_AM_A_TEAPOT);
+    public ResponseEntity<Appointment> createAppointment(@RequestBody AppointmentDTO appointmentDTO){
+        Appointment appointment = new Appointment();
+        appointment.setPatient(appointmentDTO.getPatient());
+        appointment.setDoctor(appointmentDTO.getDoctor());
+        appointment.setRoom(appointmentDTO.getRoom());
+        appointment.setStartsAt(appointmentDTO.getStartsAt());
+        appointment.setFinishesAt(appointmentDTO.getFinishesAt());
+
+        Appointment savedAppointment = appointmentRepository.save(appointment);
+        return new ResponseEntity<>(savedAppointment, HttpStatus.CREATED);
     }
 
 
